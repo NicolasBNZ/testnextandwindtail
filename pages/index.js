@@ -34,8 +34,8 @@ useEffect (() => {
   Compteur : {count}
 </h1>
 <ul>
-{posts.map(post => <li>
-<h3 key={post.id}>{post.title}</h3>
+{posts.map(post => <li key={post.id}>
+<h3>{post.id} - {post.title}</h3>
 </li>)}
   
 </ul>
