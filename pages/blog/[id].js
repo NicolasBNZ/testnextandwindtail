@@ -1,7 +1,11 @@
+import Link from 'next/link';
 
 export default function Post ({post}) {
 return <>
 <main>  
+<Link href="/">
+<a> Revenir à l'accueil</a>
+</Link>
 <h1>{post.title}</h1>
 <p>{post.body}</p>
 </main>
