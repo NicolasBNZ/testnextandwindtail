@@ -3,15 +3,15 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 
-export default function Home() {
+export default function Home({posts}) {
 
-const [posts, setPosts] = useState([]);
+// const [posts, setPosts] = useState([]);
 
-useEffect (() => {
-  const data = fetch('https://jsonplaceholder.typicode.com/posts?_limit=4')
-  .then(response => response.json())
-  .then(setPosts)
-  }, []);
+// useEffect (() => {
+//   const data = fetch('https://jsonplaceholder.typicode.com/posts?_limit=4')
+//   .then(response => response.json())
+//   .then(setPosts)
+//   }, []);
 
   return (
     <>
@@ -31,3 +31,13 @@ useEffect (() => {
   )
 }
 
+// Affichage statique
+export async function getStaticProps () {
+  const posts = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=4')
+  .then(response => response.json())
+  return {
+props :{
+  posts
+}
+  };
+};
