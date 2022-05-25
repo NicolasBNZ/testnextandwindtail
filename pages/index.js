@@ -13,6 +13,16 @@ export default function Home({posts}) {
 //   .then(setPosts)
 //   }, []);
 
+const [count, setCount] = useState(0);
+
+useEffect (() => {
+  const timer = setInterval(()=> setCount(n=>n+1),1000);
+  return () => {
+    clearInterval(timer);
+  }
+}
+);
+
   return (
     <>
  <Head>
@@ -20,9 +30,12 @@ export default function Home({posts}) {
   Page test 
 </title>
 </Head>
+<h1>
+  Compteur : {count}
+</h1>
 <ul>
 {posts.map(post => <li>
-<h3>{post.title}</h3>
+<h3 key={post.id}>{post.title}</h3>
 </li>)}
   
 </ul>
