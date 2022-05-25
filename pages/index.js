@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
+import Link from 'next/Link'
 
 export default function Home({posts}) {
 
@@ -35,7 +36,11 @@ useEffect (() => {
 </h1>
 <ul>
 {posts.map(post => <li key={post.id}>
-<h3>{post.id} - {post.title}</h3>
+<Link href={`/blog/${post.id}`}>
+  <a>
+    <h3>{post.id} - {post.title}</h3>
+</a>
+</Link>
 </li>)}
   
 </ul>
