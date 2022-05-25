@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 import { useEffect, useState } from 'react'
 import Link from 'next/Link'
 
-export default function Home({posts}) {
+export default function Home({posts, date}) {
 
 // const [posts, setPosts] = useState([]);
 
@@ -31,11 +31,16 @@ useEffect (() => {
   Page test 
 </title>
 </Head>
-<h1>
-  Compteur : {count}
+<div className='flex justify-center mt-50 '>
+<h1 className='customtext'>
+  Compteur : {count} - {date}
 </h1>
-<ul>
-{posts.map(post => <li key={post.id}>
+</div>
+<h1>
+  Compteur : {count} - {date}
+</h1>
+<ul className='flex flex-col mt-50 '>
+{posts.map(post => <li key={post.id} className='border-4 w-1/2 '>
 <Link href={`/blog/${post.id}`}>
   <a>
     <h3>{post.id} - {post.title}</h3>
@@ -50,23 +55,28 @@ useEffect (() => {
 }
 
 // Server side rendering
-export async function getServerSideProps () {
-  const posts = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=4`)
-  .then(response => response.json())
-  return {
-props :{
-  posts
-}
-  };
-};
-
-// Affichage statique
-// export async function getStaticProps () {
-//   const posts = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=4')
+// export async function getServerSideProps () {
+//   const posts = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=4`)
 //   .then(response => response.json())
 //   return {
 // props :{
-//   posts
+//   posts,
+//   date: (new Date ()).toString()
 // }
 //   };
 // };
+
+// Affichage statique
+// le revalidate permet de raffraichir la page statique régulièrement -> Static Site generation, rapide pour l'utilisateur avec du contenu 
+// nouveau régulièrement
+export async function getStaticProps () {
+  const posts = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=4')
+  .then(response => response.json())
+  return {
+props :{
+  posts,
+date: (new Date ()).toString()
+},
+revalidate:5,
+  };
+};
