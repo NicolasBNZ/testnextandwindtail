@@ -49,9 +49,9 @@ useEffect (() => {
   )
 }
 
-// Affichage statique
-export async function getStaticProps () {
-  const posts = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=4')
+// Server side rendering
+export async function getServerSideProps () {
+  const posts = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=4`)
   .then(response => response.json())
   return {
 props :{
@@ -59,3 +59,14 @@ props :{
 }
   };
 };
+
+// Affichage statique
+// export async function getStaticProps () {
+//   const posts = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=4')
+//   .then(response => response.json())
+//   return {
+// props :{
+//   posts
+// }
+//   };
+// };
